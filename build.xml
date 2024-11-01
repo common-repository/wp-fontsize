@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project name="NAME" default="default">
+     <property name="deploy" value="/Users/robertgregor/git/WordPress/wp-content/plugins/wp_fontsize/" />
+	<property name="zipfile" value="wp_fontsize.zip"/>
+    <!-- FILESETS -->
+    <fileset dir="${project.basedir}" id="files">
+        <include name="**/**" />
+        <exclude name="*.git" />
+        <exclude name="*.svn" />
+        <exclude name="*.css" />
+        <exclude name=".project" />
+        <exclude name="*.xml" />
+        <exclude name=".buildpath" />
+        <exclude name=".settings/*" />
+    </fileset>
+    <fileset dir="${project.basedir}" id="zip">
+    	<include name="**/**" />
+    	<exclude name="*.psd" />
+    	<exclude name="*.git" />
+	</fileset>
+    <!-- DEPLOYMENT TARGETS -->
+    <target name="default">
+        <copy todir="${deploy}" includeemptydirs="true">
+                <fileset refid="files" />
+            </copy>
+    </target>
+    <target name="zip">
+    	<delete file="${zipfile}"/>
+		<zip destfile="${zipfile}">
+	        <fileset refid="zip" />
+		</zip>
+    </target>
+</project>
